@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXALIA — Tu nexo hacia una vida mejor | Proinát & Lifehuni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nexalia: {
+              green: '#104F25', deep: '#003810', amber: '#D3930F', amberBright: '#FFA20D',
+              charcoal: '#181A18', bone: '#F7F4EE', boneDark: '#EBE5D8', terracotta: '#C85A17'
+            }
+          },
+          fontFamily: {
+            poster: ['"Anton"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F7F4EE; color: #181A18; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+    #agrumea-cursor-pill {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%) scale(0.85); opacity: 0; transition: opacity 0.2s, transform 0.2s;
+    }
+    #agrumea-cursor-pill.active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .giant-poster-text { font-family: 'Anton', sans-serif; line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; }
+    .henrietta-tape { transform: rotate(-2.5deg); box-shadow: 0 10px 25px rgba(0,0,0,0.18); transition: transform 0.35s ease; }
+    .henrietta-col:hover .henrietta-tape { transform: rotate(1.5deg) scale(1.06); }
+    .henrietta-jar { transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+    .henrietta-col:hover .henrietta-jar { transform: translateY(-16px) rotate(5deg) scale(1.08); }
+    @keyframes marqueeL { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+    @keyframes marqueeR { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+    .ribbon-track-left { display: flex; width: 200%; animation: marqueeL 22s linear infinite; }
+    .ribbon-track-right { display: flex; width: 200%; animation: marqueeR 24s linear infinite; }
+    #fullscreen-menu { clip-path: circle(0% at 92% 4%); transition: clip-path 0.55s cubic-bezier(0.77, 0, 0.175, 1); pointer-events: none; }
+    #fullscreen-menu.open { clip-path: circle(150% at 92% 4%); pointer-events: auto; }
+  </style>
+</head>
+
+<body class="selection:bg-nexalia-amber selection:text-nexalia-charcoal">
+
+  <!-- Píldora flotante del cursor estilo Agrumea -->
+  <div id="agrumea-cursor-pill" class="hidden md:flex items-center gap-2 bg-white text-nexalia-charcoal px-5 py-2.5 rounded-full shadow-2xl border border-nexalia-amber/40 font-sans font-extrabold text-xs uppercase tracking-widest whitespace-nowrap">
+    <span class="text-nexalia-amber text-sm">♦</span>
+    <span id="cursor-pill-text">DESCUBRIR PRODUCTO</span>
+  </div>
+
+  <!-- CABECERA ESTILO AGRUMEA -->
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 pointer-events-none">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between">
+      <div class="pointer-events-auto hidden lg:flex items-center gap-2 bg-nexalia-bone/95 backdrop-blur-md border border-nexalia-charcoal/15 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-nexalia-green animate-ping"></span>
+        <span>Envíos 24-48h Capitales · Contraentrega</span>
+      </div>
+
+      <!-- LOGO OFICIAL NEXALIA -->
+      <button type="button" onclick="navigateTo('home')" class="pointer-events-auto bg-nexalia-bone/95 backdrop-blur-md px-6 py-2.5 rounded-full border border-nexalia-charcoal/10 shadow-md hover:scale-105 transition-transform flex items-center gap-3">
+        <img id="custom-logo-img" class="hidden h-9 w-auto object-contain" src="" alt="NEXALIA" />
+        <svg id="default-logo-svg" class="h-9 w-auto" viewBox="0 0 460 110" fill="none">
+          <path d="M35 22 C18 22, 10 38, 22 54 C30 65, 29 76, 22 86 C16 95, 23 106, 34 106 C45 106, 50 94, 44 83 C39 74, 43 64, 54 69 C66 74, 72 86, 80 94 C88 102, 104 97, 104 83 C104 71, 92 64, 80 64 C66 64, 57 54, 56 38 C55 25, 45 22, 35 22 Z" fill="#D3930F"/>
+          <circle cx="80" cy="42" r="15" fill="#D3930F"/>
+          <circle cx="101" cy="18" r="9" fill="#D3930F"/>
+          <g fill="#104F25">
+            <path d="M122 96 V28 L168 80 V28 H177 V98 L131 46 V96 Z"/>
+            <path d="M196 28 H236 V37 H205 V57 H232 V66 H205 V87 H236 V96 H196 V66 H187 C184 66, 182 64, 182 61.5 C182 59, 184 57, 187 57 H196 V28 Z"/>
+            <path d="M246 28 H257 L274 55 L291 28 H302 L280 62 L303 96 H292 L274 68 L256 96 H245 L268 62 Z"/>
+            <path d="M332 26 L360 96 H322 L326 87 H347 L332 46 L315 96 H305 L332 26 Z"/>
+            <path d="M368 28 H377 V87 H402 V96 H368 V28 Z"/>
+            <path d="M409 28 H418 V96 H409 V28 Z"/>
+            <path d="M438 26 L460 96 H428 L432 87 H449 L438 46 L423 96 H414 L438 26 Z"/>
+          </g>
+        </svg>
+      </button>
+
+      <!-- BOTONES CARRITO + MENÚ ♦ -->
+      <div class="pointer-events-auto flex items-center gap-2">
+        <button type="button" onclick="toggleCart()" class="bg-nexalia-green text-white px-4 py-2.5 rounded-full font-sans font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md hover:bg-nexalia-deep">
+          <span>CARRITO</span>
+          <span id="cart-badge" class="bg-nexalia-amber text-nexalia-charcoal w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-extrabold">0</span>
+        </button>
+        <button type="button" onclick="toggleMenu()" class="bg-nexalia-bone/95 backdrop-blur-md border border-nexalia-charcoal/20 text-nexalia-charcoal px-5 py-2.5 rounded-full font-sans font-extrabold text-xs uppercase tracking-widest flex items-center gap-2.5 shadow-md hover:bg-nexalia-amber hover:text-white transition-all">
+          <span>MENÚ</span>
+          <span class="w-6 h-6 rounded-full bg-nexalia-amber text-white flex items-center justify-center text-[10px]">♦</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CORTINA DE MENÚ A PANTALLA COMPLETA (ESTILO AGRUMEA) -->
+  <div id="fullscreen-menu" class="fixed inset-0 z-50 bg-nexalia-terracotta text-nexalia-bone flex flex-col justify-between p-6 sm:p-12 overflow-y-auto">
+    <div class="flex items-center justify-between">
+      <span class="font-sans text-xs font-bold uppercase tracking-[0.25em] opacity-80">NEXALIA × PROINÁT · COLOMBIA</span>
+      <button type="button" onclick="toggleMenu()" class="border border-nexalia-bone/40 px-5 py-2 rounded-full font-sans font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-nexalia-bone hover:text-nexalia-terracotta">
+        <span>CERRAR</span>
+        <span class="w-6 h-6 rounded-full bg-nexalia-charcoal text-white flex items-center justify-center">✕</span>
+      </button>
+    </div>
+
+    <nav class="my-auto py-6">
+      <div onclick="navigateTo('home'); toggleMenu();" class="border-b border-nexalia-bone/25 py-4 sm:py-6 cursor-pointer group flex items-center justify-between">
+        <span class="font-serif text-5xl sm:text-7xl md:text-8xl tracking-tight group-hover:translate-x-6 transition-transform">HOME <span class="text-nexalia-amber">♦</span></span>
+        <span class="text-xs font-sans uppercase tracking-widest opacity-75">Portal Dual + Escenario 3D</span>
+      </div>
+      <div onclick="navigateTo('tienda'); toggleMenu();" class="border-b border-nexalia-bone/25 py-4 sm:py-6 cursor-pointer group flex items-center justify-between sm:pl-20">
+        <span class="font-serif italic text-5xl sm:text-7xl md:text-8xl tracking-tight group-hover:translate-x-6 transition-transform">LA DESPENSA</span>
+        <span class="text-xs font-sans uppercase tracking-widest opacity-75">21 Productos · 10 Combos · Quiz</span>
+      </div>
+      <div onclick="navigateTo('negocio'); toggleMenu();" class="border-b border-nexalia-bone/25 py-4 sm:py-6 cursor-pointer group flex items-center justify-between sm:pl-40">
+        <span class="font-serif text-5xl sm:text-7xl md:text-8xl tracking-tight group-hover:translate-x-6 transition-transform">OPORTUNIDAD</span>
+        <span class="text-xs font-sans uppercase tracking-widest opacity-75">Simulador 2026 · 6 Gemas · Bonos</span>
+      </div>
+      <div onclick="navigateTo('recetas'); toggleMenu();" class="border-b border-nexalia-bone/25 py-4 sm:py-6 cursor-pointer group flex items-center justify-between sm:pl-60">
+        <span class="font-serif italic text-5xl sm:text-7xl md:text-8xl tracking-tight group-hover:translate-x-6 transition-transform">RECETARIO & BLOG</span>
+        <span class="text-xs font-sans uppercase tracking-widest opacity-75">Recetas Oficiales Lifehuni</span>
+      </div>
+    </nav>
+
+    <div class="flex flex-wrap justify-between items-center text-xs font-bold uppercase tracking-widest opacity-90 gap-4">
+      <div class="flex gap-6">
+        <button type="button" onclick="scrollToQuizFromAnywhere()" class="underline">✦ Test de Producto</button>
+        <button type="button" onclick="navigateTo('negocio'); toggleMenu();" class="underline">✦ Simulador de Ingresos</button>
+      </div>
+      <div>Pago Seguro Wompi · Envíos 24-48h Capitales · Contraentrega</div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PÁGINA 1: HOME (Escenario Agrumea + Cintas Topas + Tira Henrietta)    -->
+  <!-- ===================================================================== -->
+  <div id="page-home" class="page-section">
+    <section class="relative min-h-screen pt-28 pb-16 flex flex-col justify-between overflow-hidden bg-nexalia-bone">
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        <h1 id="hero-giant-word" class="giant-poster-text text-[22vw] text-nexalia-green/10 tracking-tighter leading-none">NEXALIA</h1>
+      </div>
+
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[560px] h-[400px] sm:h-[560px] bg-nexalia-green rounded-[280px_280px_36px_36px] shadow-2xl"></div>
+
+      <!-- Frascos desenfocados de fondo e ingredientes -->
+      <img class="img-macalife hidden lg:block absolute left-[6%] top-[20%] w-48 h-auto blur-[4px] opacity-75 -rotate-12 pointer-events-none" src="" alt="" />
+      <img class="img-agyfort hidden lg:block absolute right-[6%] bottom-[16%] w-52 h-auto blur-[4px] opacity-75 rotate-12 pointer-events-none" src="" alt="" />
+      <img id="floating-splash" class="img-splash absolute left-[12%] sm:left-[23%] top-[16%] w-36 sm:w-56 h-auto pointer-events-none z-10" src="" alt="" />
+      <img id="floating-maca" class="img-maca-roots absolute right-[12%] sm:right-[22%] bottom-[18%] w-36 sm:w-52 h-auto pointer-events-none z-10" src="" alt="" />
+
+      <!-- Frascos gigantes centrales que rotan con el scroll -->
+      <div class="relative z-20 my-auto max-w-6xl mx-auto w-full px-4 flex flex-col items-center">
+        <div class="relative flex items-center justify-center h-[360px] sm:h-[460px] w-full">
+          <div id="hero-jar-left" onclick="openProductModal('diviher')" onmouseenter="showPill('VER FICHA DIVI-HER')" onmouseleave="hidePill()" class="cursor-pointer -mr-6 sm:-mr-10 z-20" style="transform: rotate(-9deg);">
+            <img class="img-diviher w-52 sm:w-72 md:w-80 h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.45)]" src="" alt="Divi-Her" />
+          </div>
+
+          <button type="button" onclick="navigateTo('tienda')" class="z-30 bg-white text-nexalia-charcoal hover:bg-nexalia-amber hover:text-white px-6 py-3.5 rounded-full font-sans font-extrabold text-xs uppercase tracking-widest shadow-2xl flex items-center gap-2 transition-all hover:scale-110 border border-nexalia-amber/40">
+            <span class="text-nexalia-amber">♦</span> DESCUBRIR LA DESPENSA
+          </button>
+
+          <div id="hero-jar-right" onclick="openProductModal('macalife')" onmouseenter="showPill('VER FICHA MACA-LIFE')" onmouseleave="hidePill()" class="cursor-pointer -ml-6 sm:-ml-10 z-10" style="transform: rotate(8deg) translateY(18px);">
+            <img class="img-macalife w-52 sm:w-72 md:w-80 h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.45)]" src="" alt="Maca-Life" />
+          </div>
+        </div>
+
+        <div class="w-full grid grid-cols-1 md:grid-cols-12 items-end gap-6 mt-4">
+          <div class="md:col-span-6">
+            <p class="font-poster text-2xl sm:text-4xl text-nexalia-charcoal uppercase leading-none">
+              BIENESTAR NATURAL & CRECIMIENTO<br/>
+              <span class="font-serif italic font-bold text-nexalia-green text-3xl sm:text-5xl normal-case">Tu nexo hacia una vida mejor.</span>
+            </p>
+          </div>
+          <div class="md:col-span-6 md:text-right">
+            <p class="text-xs font-bold uppercase tracking-widest text-nexalia-charcoal/70 mb-1">HAZ SCROLL PARA VER GIRAR LOS PRODUCTOS ↓</p>
+            <p class="font-poster text-xl sm:text-3xl text-nexalia-terracotta uppercase">PAGO SEGURO WOMPI · ENVÍO CONTRA ENTREGA</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cintas Diagonales Cruzadas en X (Estilo Bar Topas) -->
+    <div class="relative py-12 bg-nexalia-charcoal overflow-hidden">
+      <div class="bg-nexalia-amber text-nexalia-charcoal py-4 transform -rotate-2 scale-105 shadow-xl border-y-2 border-nexalia-charcoal">
+        <div class="ribbon-track-left items-center font-poster text-3xl sm:text-5xl uppercase tracking-wide">
+          <span class="mx-8">¡BIENESTAR REAL! ✦ PAGO SEGURO CON WOMPI ✦ ENVÍOS 24-48H A CAPITALES ✦ SERVICIO CONTRA ENTREGA</span>
+          <span class="mx-8">¡BIENESTAR REAL! ✦ PAGO SEGURO CON WOMPI ✦ ENVÍOS 24-48H A CAPITALES ✦ SERVICIO CONTRA ENTREGA</span>
+        </div>
+      </div>
+      <div class="bg-nexalia-bone text-nexalia-green py-3 transform rotate-2 scale-105 -mt-4 shadow-2xl border-y-2 border-nexalia-charcoal">
+        <div class="ribbon-track-right items-center font-poster text-xl sm:text-3xl uppercase tracking-wider">
+          <span class="mx-6">✱ TARJETA CRÉDITO Y DÉBITO ✱ BOTÓN BANCOLOMBIA ✱ BILLETERAS DIGITALES ✱ EFECTIVO CONTRA ENTREGA ✱ HASTA 72H MUNICIPIOS LEJANOS</span>
+          <span class="mx-6">✱ TARJETA CRÉDITO Y DÉBITO ✱ BOTÓN BANCOLOMBIA ✱ BILLETERAS DIGITALES ✱ EFECTIVO CONTRA ENTREGA ✱ HASTA 72H MUNICIPIOS LEJANOS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split Screen Interactivo: ¿Qué buscas hoy? -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+      <div onclick="navigateTo('tienda')" onmouseenter="showPill('ENTRAR A LA TIENDA')" onmouseleave="hidePill()" class="group relative bg-nexalia-green text-nexalia-bone p-10 sm:p-16 flex flex-col justify-between cursor-pointer overflow-hidden border-b lg:border-b-0 lg:border-r border-white/15">
+        <div class="relative z-10 flex justify-between items-center">
+          <span class="font-sans text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-amber">CAMINO 01 · NUTRICIÓN</span>
+          <span class="px-4 py-1.5 rounded-full border border-white/30 text-xs font-bold uppercase group-hover:bg-nexalia-amber group-hover:text-nexalia-charcoal">21 Productos INVIMA ↗</span>
+        </div>
+        <div class="relative z-10 my-10">
+          <p class="font-serif italic text-2xl sm:text-3xl text-white/80 mb-2">¿Qué buscas hoy?</p>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl group-hover:hidden">CUIDAR<br/>MI SALUD</h2>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl text-nexalia-amber hidden group-hover:block">IR A LA<br/>TIENDA →</h2>
+          <p class="mt-4 text-sm sm:text-base text-white/85 max-w-md">Fórmulas naturales con registro INVIMA. Explora las 10 Combinaciones Perfectas o haz nuestro test inteligente.</p>
+        </div>
+        <div class="relative z-10"><span class="inline-flex bg-nexalia-amber text-nexalia-charcoal px-7 py-4 rounded-full font-extrabold text-xs uppercase tracking-widest">Explorar Catálogo 2026</span></div>
+        <img class="img-diviher absolute -bottom-10 -right-6 w-56 sm:w-72 h-auto opacity-45 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500 pointer-events-none" src="" alt="" />
+      </div>
+
+      <div onclick="navigateTo('negocio')" onmouseenter="showPill('IR AL SIMULADOR')" onmouseleave="hidePill()" class="group relative bg-nexalia-charcoal text-nexalia-bone p-10 sm:p-16 flex flex-col justify-between cursor-pointer overflow-hidden">
+        <div class="relative z-10 flex justify-between items-center">
+          <span class="font-sans text-xs font-extrabold uppercase tracking-[0.25em] text-emerald-400">CAMINO 02 · EQUIPO NEXALIA</span>
+          <span class="px-4 py-1.5 rounded-full border border-white/30 text-xs font-bold uppercase group-hover:bg-nexalia-amber group-hover:text-nexalia-charcoal">20% a 40% + Red ↗</span>
+        </div>
+        <div class="relative z-10 my-10">
+          <p class="font-serif italic text-2xl sm:text-3xl text-white/80 mb-2">¿Qué buscas hoy?</p>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl group-hover:hidden">CRECER MI<br/>NEGOCIO</h2>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl text-nexalia-amber hidden group-hover:block">SIMULAR<br/>INGRESOS →</h2>
+          <p class="mt-4 text-sm sm:text-base text-white/85 max-w-md">Recibe herramientas tecnológicas exclusivas del equipo NEXALIA que asesoran clientes por ti y escala por los 6 rangos de gemas.</p>
+        </div>
+        <div class="relative z-10"><span class="inline-flex bg-white text-nexalia-charcoal group-hover:bg-nexalia-amber px-7 py-4 rounded-full font-extrabold text-xs uppercase tracking-widest">Abrir Simulador de Ganancias</span></div>
+        <img class="img-gem-esmeralda absolute -bottom-8 -right-6 w-52 sm:w-64 h-auto opacity-55 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 pointer-events-none" src="" alt="" />
+      </div>
+    </section>
+
+    <!-- Tira Bicolor de 4 Columnas estilo Henrietta Said -->
+    <section class="py-16 bg-nexalia-bone">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-8 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-terracotta block mb-2">SELECCIÓN ESTRELLA 2026</span>
+          <h2 class="giant-poster-text text-5xl sm:text-7xl text-nexalia-charcoal">TOCA UN FRASCO <span class="font-serif italic font-bold text-nexalia-green normal-case">y abre su ficha</span></h2>
+        </div>
+        <button type="button" onclick="navigateTo('tienda')" class="px-6 py-3 rounded-full bg-nexalia-charcoal text-white font-bold text-xs uppercase tracking-widest hover:bg-nexalia-green">Ver los 21 Productos →</button>
+      </div>
+      <div id="henrietta-strip" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-y-4 border-nexalia-charcoal"></div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PÁGINA 2: TIENDA COMPLETA (21 Productos + 10 Combos + Quiz)           -->
+  <!-- ===================================================================== -->
+  <div id="page-tienda" class="page-section hidden pt-28 pb-24">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+      <div class="border-b-2 border-nexalia-charcoal pb-8 mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-green block mb-2">CATÁLOGO OFICIAL PROINÁT · PRECIOS 2026</span>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl text-nexalia-charcoal">LA DESPENSA <span class="font-serif italic font-bold text-nexalia-terracotta normal-case">Natural</span></h2>
+        </div>
+        <div class="max-w-md space-y-1 text-xs font-semibold text-nexalia-charcoal/80">
+          <p>✓ <strong>Pago seguro con Wompi:</strong> Tarjeta crédito/débito, Botón Bancolombia, billeteras digitales y efectivo.</p>
+          <p>✓ <strong>Envío rápido y Contra Entrega:</strong> 24-48 hrs capitales y hasta 72 hrs municipios lejanos.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-12">
+        <button type="button" onclick="filterCatalog('all', this)" class="store-filter-btn bg-nexalia-charcoal text-white px-5 py-2.5 rounded-full font-extrabold text-xs uppercase">Todos (21)</button>
+        <button type="button" onclick="filterCatalog('combos', this)" class="store-filter-btn bg-nexalia-amber text-nexalia-charcoal px-5 py-2.5 rounded-full font-extrabold text-xs uppercase">★ Las 10 Combinaciones Perfectas</button>
+        <button type="button" onclick="filterCatalog('digestivo', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Peso & Digestivo</button>
+        <button type="button" onclick="filterCatalog('endocrino', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Hormonal & Reproductivo</button>
+        <button type="button" onclick="filterCatalog('nervioso', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Energía, Mente & Sueño</button>
+        <button type="button" onclick="filterCatalog('articular', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Articular, Muscular & Piel</button>
+        <button type="button" onclick="filterCatalog('circulatorio', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Circulatorio, Renal & Glucosa</button>
+        <button type="button" onclick="filterCatalog('inmune', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Defensas & Respiratorio</button>
+        <button type="button" onclick="filterCatalog('mascotas', this)" class="store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase">Mascotas (NaturalPet's)</button>
+      </div>
+
+      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20"></div>
+
+      <!-- Banner Mascotas -->
+      <div class="rounded-[2.5rem] bg-nexalia-green text-white p-8 sm:p-14 mb-20 grid grid-cols-1 lg:grid-cols-12 items-center gap-8">
+        <div class="lg:col-span-7 space-y-4">
+          <span class="px-4 py-1 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-xs uppercase tracking-widest">NaturalPet's by Lifehuni</span>
+          <h3 class="giant-poster-text text-5xl sm:text-7xl leading-none">PARA LOS QUE SIEMPRE <span class="font-serif italic text-nexalia-amber normal-case">están ahí.</span></h3>
+          <p class="text-white/85 text-sm sm:text-base max-w-xl">Fórmulas masticables con colágeno, glucosamina, prebióticos y omega 3-6 para perros y gatos: <strong>Movi-Life, Forti-Life, Cat-Glow y Cat-Flex</strong>.</p>
+          <button type="button" onclick="filterCatalog('mascotas')" class="px-7 py-4 rounded-full bg-white text-nexalia-charcoal font-extrabold text-xs uppercase tracking-widest hover:bg-nexalia-amber">Ver Línea Mascotas ↑</button>
+        </div>
+        <div class="lg:col-span-5 flex justify-center"><img class="img-pets w-64 sm:w-80 h-auto drop-shadow-2xl" src="" alt="Mascotas" /></div>
+      </div>
+
+      <!-- Quiz Interactivo -->
+      <div id="quiz-anchor" class="rounded-[2.5rem] bg-nexalia-charcoal text-nexalia-bone p-8 sm:p-14 border-4 border-nexalia-amber">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex flex-wrap justify-between items-center gap-4 mb-8 border-b border-white/15 pb-4">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-amber block">TECNOLOGÍA EXCLUSIVA EQUIPO NEXALIA</span>
+              <h3 class="giant-poster-text text-4xl sm:text-6xl mt-1">ENCUENTRA TU SUPLEMENTO O COMBO IDEAL</h3>
+            </div>
+            <span id="quiz-step-indicator" class="px-4 py-2 rounded-full bg-white/10 font-bold text-xs uppercase tracking-widest">Paso 1 de 3</span>
+          </div>
+          <div id="quiz-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PÁGINA 3: NEGOCIO (Simulador Con Alerta de Rango + 6 Gemas)           -->
+  <!-- ===================================================================== -->
+  <div id="page-negocio" class="page-section hidden pt-28 pb-24">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+      <div class="border-b-2 border-nexalia-charcoal pb-10 mb-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8">
+          <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-terracotta block mb-2">PLAN DE COMPENSACIÓN OFICIAL LIFEHUNI 2026</span>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl text-nexalia-charcoal">CONSTRUYE TU RED <span class="font-serif italic font-bold text-nexalia-green normal-case">con tecnología propia.</span></h2>
+        </div>
+        <div class="lg:col-span-4 text-sm text-nexalia-charcoal/80">
+          En <strong>NEXALIA</strong> recibes este portal con Quiz de diagnóstico y Simulador para que tus clientes sepan qué comprar sin que tengas que ser médico.
+        </div>
+      </div>
+
+      <!-- SIMULADOR GAMIFICADO -->
+      <div class="rounded-[2.5rem] bg-nexalia-charcoal text-white p-8 sm:p-14 mb-20 shadow-2xl border-2 border-nexalia-amber/40">
+        <div id="rank-up-banner" class="rounded-3xl bg-gradient-to-r from-nexalia-green via-emerald-900 to-nexalia-deep border-2 border-nexalia-amber p-6 mb-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-5">
+            <img id="sim-current-gem-img" class="w-20 h-20 object-contain drop-shadow-xl" src="" alt="Gema" />
+            <div>
+              <span class="px-3 py-1 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-[11px] uppercase tracking-widest">ESTADO DE RANGO EN VIVO</span>
+              <h3 id="sim-rank-name" class="giant-poster-text text-4xl sm:text-5xl text-white mt-2"></h3>
+              <p id="sim-rank-message" class="text-xs sm:text-sm text-white/85 mt-1"></p>
+            </div>
+          </div>
+          <div class="text-left md:text-right bg-black/30 p-4 rounded-2xl border border-white/10 min-w-[240px]">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-nexalia-amber block">PREMIOS DE ESTE TÍTULO</span>
+            <p id="sim-rank-bonus" class="font-poster text-2xl sm:text-3xl text-white mt-1"></p>
+            <span id="sim-rank-gens" class="text-xs text-emerald-300 font-semibold block mt-0.5"></span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-7 space-y-6">
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+              <div class="flex justify-between items-center mb-2">
+                <label class="font-bold text-sm uppercase tracking-wider text-nexalia-amber">1. Tus Puntos Personales (Escalera 20% a 40%):</label>
+                <span id="lbl-personal-pts" class="font-poster text-3xl text-white"></span>
+              </div>
+              <input id="rng-personal-pts" type="range" min="20" max="500" step="20" value="400" oninput="runFullSimulator()" class="w-full accent-nexalia-amber cursor-pointer h-2 rounded-lg" />
+              <div class="flex justify-between text-[11px] text-white/60 mt-2 font-semibold">
+                <span>20% (0-79)</span><span>24% (80+)</span><span>28% (160+)</span><span>32% (240+)</span><span>36% (320+)</span><span class="text-nexalia-amber">40% LIFE (400+)</span>
+              </div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+              <div class="flex justify-between items-center mb-2">
+                <label class="font-bold text-sm uppercase tracking-wider text-emerald-400">2. Empresarios Life Platino en tu 1ra Línea (Sube tu Rango):</label>
+                <span id="lbl-platinos" class="font-poster text-3xl text-emerald-400"></span>
+              </div>
+              <input id="rng-platinos" type="range" min="0" max="16" step="1" value="4" oninput="runFullSimulator()" class="w-full accent-emerald-400 cursor-pointer h-2 rounded-lg" />
+              <div class="flex justify-between text-[11px] text-white/60 mt-2 font-semibold">
+                <span>0 (Life)</span><span>1-3 (Platino)</span><span>4+ (Zafiro)</span><span>8+ (Esmeralda)</span><span>12+ (Diamante)</span><span class="text-nexalia-amber">16 (Doble Diamante)</span>
+              </div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-6">
+              <div class="flex justify-between items-center mb-2">
+                <label class="font-bold text-sm uppercase tracking-wider text-white/90">3. Tu % de Beneficio de Red (Tabla 1% al 4%):</label>
+                <span id="lbl-red-pct" class="font-poster text-3xl text-nexalia-amber"></span>
+              </div>
+              <input id="rng-red-pct" type="range" min="1" max="4" step="0.5" value="3" oninput="runFullSimulator()" class="w-full accent-nexalia-amber cursor-pointer h-2 rounded-lg" />
+              <div class="flex justify-between text-[11px] text-white/60 mt-2">
+                <span>1.0% (30 pts)</span><span>2.0% (90 pts)</span><span>3.0% (150 pts)</span><span>4.0% (240+ pts)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-nexalia-bone text-nexalia-charcoal rounded-3xl p-8 space-y-5">
+            <div class="flex justify-between items-center border-b border-nexalia-charcoal/15 pb-4">
+              <span class="text-xs font-extrabold uppercase tracking-widest text-nexalia-green">PROYECCIÓN MENSUAL</span>
+              <span id="sim-discount-pill" class="px-3 py-1 rounded-full bg-nexalia-green text-white font-extrabold text-xs"></span>
+            </div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-widest text-nexalia-charcoal/60 block">Ingreso Mensual Recurrente Estimado</span>
+              <p id="sim-monthly-total" class="giant-poster-text text-5xl sm:text-6xl text-nexalia-green mt-1"></p>
+            </div>
+            <div class="space-y-2.5 text-xs border-y border-nexalia-charcoal/15 py-4">
+              <div class="flex justify-between"><span>1. Utilidad Venta Directa (Precios 2026):</span><strong id="sim-row-direct"></strong></div>
+              <div class="flex justify-between"><span>2. Diferenciales (4%-20%) + Afiliación:</span><strong id="sim-row-diff"></strong></div>
+              <div class="flex justify-between"><span>3. Regalías de Red (1% a 4% por Gen):</span><strong id="sim-row-royalties" class="text-nexalia-green"></strong></div>
+              <div class="flex justify-between pt-2 border-t border-nexalia-charcoal/10 text-nexalia-terracotta">
+                <span class="font-bold">4. Bonos en Efectivo por Título:</span><strong id="sim-row-title-bonus" class="font-extrabold"></strong>
+              </div>
+            </div>
+            <div class="bg-nexalia-boneDark p-4 rounded-2xl text-xs space-y-1">
+              <strong class="block uppercase tracking-wider">Requisito Oficial en tu Organización:</strong>
+              <p id="sim-org-req" class="text-nexalia-charcoal/80"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="giant-poster-text text-5xl text-nexalia-charcoal mb-6">TOCA UN RANGO PARA SIMULAR SUS REQUISITOS Y BONOS:</h3>
+      <div id="ranks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"></div>
+
+      <!-- Nancy y Felipe -->
+      <div class="rounded-[2.5rem] bg-nexalia-green text-white p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-72 h-80 bg-nexalia-bone rounded-[160px_160px_24px_24px] overflow-hidden border-4 border-nexalia-amber">
+            <img class="img-leaders w-full h-full object-cover" src="" alt="Nancy y Felipe" />
+          </div>
+        </div>
+        <div class="lg:col-span-7 space-y-5">
+          <span class="px-4 py-1 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-xs uppercase tracking-widest">FUNDADORES EQUIPO NEXALIA</span>
+          <h3 class="giant-poster-text text-4xl sm:text-6xl leading-none">"CREAMOS EL SISTEMA QUE NOS HUBIERA GUSTADO TENER EL PRIMER DÍA."</h3>
+          <p class="text-white/85 text-base leading-relaxed">En <strong>NEXALIA</strong> te entregamos este portal con diagnóstico automatizado, capacitación semanal de 20 minutos y retos propios para que crezcas acompañado.</p>
+          <a href="https://wa.me/573000000000?text=Hola%20Nancy%20y%20Felipe,%20quiero%20conocer%20el%20equipo%20NEXALIA" target="_blank" class="inline-flex bg-nexalia-amber text-nexalia-charcoal px-8 py-4 rounded-full font-extrabold text-xs uppercase tracking-widest hover:bg-white">Hablar con Nancy y Felipe →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PÁGINA 4: RECETARIO OFICIAL & BLOG SEO (`/recetas`)                   -->
+  <!-- ===================================================================== -->
+  <div id="page-recetas" class="page-section hidden pt-28 pb-24">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+      <div class="border-b-2 border-nexalia-charcoal pb-8 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-[0.25em] text-nexalia-terracotta block mb-2">RECETARIO OFICIAL LIFEHUNI · EDICIÓN #1</span>
+          <h2 class="giant-poster-text text-6xl sm:text-8xl text-nexalia-charcoal">RECETAS <span class="font-serif italic font-bold text-nexalia-green normal-case">que te cuidan</span></h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="filterRecipes('all')" class="px-4 py-2 rounded-full bg-nexalia-charcoal text-white font-bold text-xs uppercase">Todas</button>
+          <button type="button" onclick="filterRecipes('desayunos')" class="px-4 py-2 rounded-full bg-white border border-nexalia-charcoal/20 font-bold text-xs uppercase">Desayunos</button>
+          <button type="button" onclick="filterRecipes('panaderia')" class="px-4 py-2 rounded-full bg-white border border-nexalia-charcoal/20 font-bold text-xs uppercase">Panadería</button>
+          <button type="button" onclick="filterRecipes('postres')" class="px-4 py-2 rounded-full bg-white border border-nexalia-charcoal/20 font-bold text-xs uppercase">Postres</button>
+          <button type="button" onclick="filterRecipes('empresarios')" class="px-4 py-2 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-xs uppercase">★ Recetas Empresarios Life</button>
+        </div>
+      </div>
+      <div id="recipes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </div>
+
+  <!-- MODAL FICHA TÉCNICA DE PRODUCTO -->
+  <div id="product-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="closeProductModal()" class="absolute inset-0 bg-black/65 backdrop-blur-sm"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-2xl bg-nexalia-bone p-6 sm:p-10 overflow-y-auto shadow-2xl border-l-4 border-nexalia-amber">
+      <div class="flex justify-between items-center border-b border-nexalia-charcoal/15 pb-4 mb-6">
+        <span id="mdl-system" class="px-3.5 py-1 rounded-full bg-nexalia-green text-white font-extrabold text-xs uppercase tracking-widest"></span>
+        <button type="button" onclick="closeProductModal()" class="w-10 h-10 rounded-full bg-nexalia-charcoal text-white font-bold">✕</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center mb-8">
+        <div class="sm:col-span-5 bg-nexalia-boneDark rounded-[140px_140px_24px_24px] p-6 flex justify-center">
+          <img id="mdl-img" class="w-44 h-auto drop-shadow-2xl" src="" alt="" />
+        </div>
+        <div class="sm:col-span-7 space-y-3">
+          <h3 id="mdl-title" class="giant-poster-text text-5xl text-nexalia-charcoal"></h3>
+          <p id="mdl-invima" class="text-xs font-extrabold uppercase tracking-wider text-nexalia-terracotta"></p>
+          <p id="mdl-desc" class="text-sm text-nexalia-charcoal/80 leading-relaxed"></p>
+          <div class="pt-2 flex items-baseline gap-4">
+            <span id="mdl-price" class="giant-poster-text text-4xl text-nexalia-green"></span>
+            <span id="mdl-points" class="text-xs font-bold uppercase bg-nexalia-amber/25 px-3 py-1 rounded-full"></span>
+          </div>
+          <button type="button" id="mdl-add-btn" class="w-full py-4 rounded-full bg-nexalia-green hover:bg-nexalia-deep text-white font-extrabold text-xs uppercase tracking-widest">+ Agregar al Carrito</button>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="bg-white p-5 rounded-2xl border border-nexalia-charcoal/10"><h4 class="font-poster text-xl uppercase mb-1">Modo de Consumo</h4><p id="mdl-usage" class="text-sm text-nexalia-charcoal/80"></p></div>
+        <div class="bg-white p-5 rounded-2xl border border-nexalia-charcoal/10"><h4 class="font-poster text-xl uppercase mb-1">Tabla Nutricional e Ingredientes</h4><p id="mdl-nutrition" class="text-sm text-nexalia-charcoal/80"></p></div>
+        <div class="bg-nexalia-boneDark p-5 rounded-2xl border border-nexalia-amber"><h4 class="font-poster text-xl uppercase mb-1">Testimonio Destacado</h4><p id="mdl-testimonial" class="text-sm italic"></p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRITO DRAWER -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-nexalia-bone p-6 sm:p-8 flex flex-col justify-between shadow-2xl border-l-4 border-nexalia-green">
+      <div>
+        <div class="flex justify-between items-center border-b border-nexalia-charcoal/15 pb-4 mb-6">
+          <h3 class="giant-poster-text text-3xl">TU PEDIDO NEXALIA</h3>
+          <button type="button" onclick="toggleCart()" class="w-9 h-9 rounded-full bg-white font-bold">✕</button>
+        </div>
+        <div id="cart-list" class="space-y-3 max-h-[45vh] overflow-y-auto"></div>
+      </div>
+      <div class="border-t border-nexalia-charcoal/15 pt-4 space-y-3">
+        <div class="bg-white p-3.5 rounded-2xl text-[11px] space-y-1 border border-nexalia-green/20">
+          <p class="font-bold text-nexalia-green">🚚 Envíos rápidos a toda Colombia:</p>
+          <p>• <strong>24 a 48 hrs</strong> ciudades capitales · Hasta <strong>72 hrs</strong> municipios lejanos.</p>
+          <p>• Pago seguro con <strong>Wompi</strong> (TC, Débito, Botón Bancolombia, billeteras) o <strong>Efectivo Contra Entrega</strong>.</p>
+        </div>
+        <div class="flex justify-between items-baseline">
+          <span class="font-bold text-sm uppercase">Total (<span id="cart-pts-total">0</span> pts):</span>
+          <span id="cart-price-total" class="giant-poster-text text-3xl text-nexalia-green">$0 COP</span>
+        </div>
+        <button type="button" onclick="payWithWompi()" class="w-full py-4 rounded-full bg-nexalia-green text-white font-extrabold text-xs uppercase tracking-widest shadow-lg">🔒 Pagar con Wompi (TC, Débito, Bancolombia)</button>
+        <button type="button" onclick="payContraentrega()" class="w-full py-3.5 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-xs uppercase tracking-widest">📦 Solicitar Envío Contra Entrega (Efectivo)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGADOR EN VIVO DE TUS PNGS -->
+  <div class="fixed bottom-4 left-4 z-40">
+    <details class="bg-nexalia-charcoal text-white rounded-2xl p-3.5 shadow-2xl border-2 border-nexalia-amber text-xs w-72">
+      <summary class="font-extrabold cursor-pointer text-nexalia-amber flex items-center justify-between">
+        <span>📸 Cargar mis PNGs generados</span><span>▲</span>
+      </summary>
+      <div class="mt-3 space-y-2 max-h-64 overflow-y-auto pr-1 pt-2 border-t border-white/15 text-[10px]">
+        <div><label class="block font-bold text-nexalia-amber">Logo Oficial NEXALIA:</label><input type="file" accept="image/*" onchange="loadLogoFile(event)" class="w-full" /></div>
+        <div><label class="block font-bold">1. Frasco Divi-Her:</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-diviher', 'diviher')" class="w-full" /></div>
+        <div><label class="block font-bold">2. Frasco Maca-Life:</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-macalife', 'macalife')" class="w-full" /></div>
+        <div><label class="block font-bold">3. Frasco Ju-Vent:</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-juvent', 'juvent')" class="w-full" /></div>
+        <div><label class="block font-bold">4. Frasco Agy-Fort:</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-agyfort', 'agyfort')" class="w-full" /></div>
+        <div><label class="block font-bold text-emerald-300">5. Splash Té Verde/Linaza (PNG):</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-splash')" class="w-full" /></div>
+        <div><label class="block font-bold text-emerald-300">6. Rodajas de Maca (PNG):</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-maca-roots')" class="w-full" /></div>
+        <div><label class="block font-bold text-amber-300">7. Perro y Gato (PNG):</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-pets')" class="w-full" /></div>
+        <div><label class="block font-bold text-amber-300">8. Foto Nancy y Felipe:</label><input type="file" accept="image/*" onchange="swapImg(event, '.img-leaders')" class="w-full" /></div>
+        <div><label class="block font-bold text-blue-300">9. Gema Zafiro (PNG):</label><input type="file" accept="image/*" onchange="swapGem(event, 'zafiro')" class="w-full" /></div>
+        <div><label class="block font-bold text-emerald-300">10. Gema Esmeralda (PNG):</label><input type="file" accept="image/*" onchange="swapGem(event, 'esmeralda')" class="w-full" /></div>
+        <div><label class="block font-bold text-white">11. Gema Diamante (PNG):</label><input type="file" accept="image/*" onchange="swapGem(event, 'diamante')" class="w-full" /></div>
+      </div>
+    </details>
+  </div>
+
+  <footer class="bg-nexalia-deep text-nexalia-bone py-14 px-4 sm:px-8 border-t-4 border-nexalia-amber">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div class="md:col-span-5 space-y-2"><span class="giant-poster-text text-4xl tracking-wider text-white block">NEXALIA</span><p class="text-xs text-white/80">Tu nexo hacia una vida mejor · Distribuidor Independiente Proinát / Lifehuni.</p></div>
+      <div class="md:col-span-7 text-xs text-white/70 space-y-2">
+        <p><strong>Pagos y Envíos:</strong> Pago seguro con Wompi (Tarjeta de crédito, débito, Botón Bancolombia, billeteras digitales y efectivo) y servicio de envío contra entrega. Entregas entre 24 y 48 hrs en ciudades capitales y hasta 72 hrs en municipios más lejanos.</p>
+        <p><strong>Aviso INVIMA & Ley 1700:</strong> Suplementos dietarios, no son medicamentos y no suplen una alimentación equilibrada. Oportunidad de negocio independiente.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOTOR JAVASCRIPT COMPLETO Y CERRADO AL 100% -->
+  <script>
+    function makeBottleSVG(l, rest, col, sub, pts) {
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 400"><rect x="48" y="16" width="184" height="55" rx="14" fill="#F2F2F2" stroke="#D5D5D5"/><rect x="32" y="85" width="216" height="285" rx="30" fill="#FFFFFF" stroke="#DCDCDC"/><rect x="32" y="114" width="216" height="12" fill="${col}"/><rect x="32" y="332" width="216" height="12" fill="${col}"/><circle cx="152" cy="146" r="11" fill="#F39200"/><text x="168" y="151" font-family="Arial" font-weight="bold" font-size="16" fill="#104F25">Lifehuni</text><text x="46" y="260" font-family="Impact,Arial Black" font-weight="900" font-size="108" fill="${col}">${l}</text><text x="116" y="256" font-family="Impact,Arial Black" font-weight="900" font-size="38" fill="${col}">${rest}</text><text x="85" y="302" font-family="Arial" font-weight="bold" font-size="11" fill="#181A18">${sub}</text><text x="105" y="320" font-family="Arial" font-weight="bold" font-size="11" fill="${col}">${pts}</text></svg>`);
+    }
+    function makeGemSVG(c1, c2, txt) {
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon points="60,8 106,36 106,84 60,112 14,84 14,36" fill="${c1}" stroke="#D3930F" stroke-width="5"/><polygon points="60,22 90,42 90,78 60,98 30,78 30,42" fill="${c2}"/><text x="60" y="65" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="12" fill="#FFF">${txt}</text></svg>`);
+    }
+
+    const GEMS_MAP = {
+      life: makeGemSVG('#104F25', '#1E7E34', 'LIFE'),
+      platino: makeGemSVG('#64748B', '#94A3B8', 'PLATINO'),
+      zafiro: makeGemSVG('#1E3A8A', '#2563EB', 'ZAFIRO'),
+      esmeralda: makeGemSVG('#065F46', '#10B981', 'ESMERALDA'),
+      diamante: makeGemSVG('#B45309', '#F59E0B', 'DIAMANTE')
+    };
+
+    const PRODUCTS_DB = [
+      { id:'diviher', name:'Divi-Her', cat:'digestivo', price:130729, pts:3.0, bg:'#D9531E', tape:'#B72C1C', system:'Control de Peso & Digestivo', invima:'SD2021-0001409-R1', img:makeBottleSVG('D','IVI-HER','#D9531E','60 Cápsulas','3.0 Puntos'), desc:'Bypass natural con berenjena, glucomanano, té verde y linaza. Elimina grasa localizada por lipólisis y regula el tránsito intestinal.', usage:'Tomar en ayunas 2 cápsulas con agua tibia y desayunar 30 min después. Tomar 2L de agua al día.', nutrition:'Berenjena 450mg, Konjac Glucomanano 180mg, Té Verde 150mg, Linaza 60mg, Vit B6, B1 y Cromo.', testimonial:'Caso Santa Fe de Antioquia (140kg a 102kg) y Andrés Felipe Valencia (5 meses).' },
+      { id:'macalife', name:'Maca-Life', cat:'endocrino', price:108940, pts:2.5, bg:'#104F25', tape:'#D3930F', system:'Sistema Endocrino & Hormonal', invima:'SD2012-0002442', img:makeBottleSVG('M','ACA-LIFE','#2E8B22','60 Cápsulas','2.5 Puntos'), desc:'Equilibra tiroides, salud hormonal, cólicos, menopausia, ovarios poliquísticos y fertilidad.', usage:'2 cápsulas en ayunas con agua tibia (8:00 a.m. para tiroides).', nutrition:'Raíz de Maca 300mg, Selenio, Biotina, Calcio, Vitaminas A, C, E y Complejo B.', testimonial:'Pacientes con ovarios poliquísticos logrando equilibrio hormonal y embarazo.' },
+      { id:'juvent', name:'Ju-Vent 500g', cat:'articular', price:174305, pts:4.0, bg:'#B81D43', tape:'#181A18', system:'Sistema Articular & Piel', invima:'SD2012-0002443', img:makeBottleSVG('J','U-VENT','#C81D4E','Polvo 500g','4.0 Puntos'), desc:'Colágeno hidrolizado y vitaminas para articulaciones, ligamentos, manchas (mascarilla), uñas y cabello.', usage:'1 o 2 cucharadas diarias en agua, jugo o leche.', nutrition:'Colágeno Hidrolizado 2.5g, Gelatina, Proteína de Soya, Biotina 300mcg, Vitaminas A, C, E, B12.', testimonial:'Recuperación de piel en quemadura aplicando mascarilla de Ju-Vent por 2 meses.' },
+      { id:'agyfort', name:'Agy-Fort 500g', cat:'nervioso', price:130729, pts:3.0, bg:'#E68A00', tape:'#104F25', system:'Sistema Nervioso & Energía', invima:'SD2021-0001409-R1', img:makeBottleSVG('A','GY-FORT','#D9731A','Polvo 500g','3.0 Puntos'), desc:'Aporta energía, combate cansancio y anemia por su alto contenido de hierro. Fortalece memoria y concentración.', usage:'1 o 2 cucharadas todas las mañanas en agua, jugo o leche.', nutrition:'Té Verde, Guaraná, Levadura de Cerveza, Hierro 8.99mg, Zinc, Ácido Fólico.', testimonial:'Aumento de vitalidad y masa muscular en jóvenes y deportistas.' },
+      { id:'proteclife', name:'Protec-Life', cat:'inmune', price:174305, pts:4.0, system:'Sistema Inmunológico', invima:'SD2012-0002461', img:makeBottleSVG('P','ROTEC','#C82333','Polvo 500g','4.0 Puntos'), desc:'Con Calostro Bovino y Betaglucanos. Sube defensas contra virus, rinitis, asma y estimula el crecimiento infantil.', usage:'1 o 2 cucharadas diarias en agua, jugo o leche.', nutrition:'Calostro Bovino 5g, Betaglucano, L-Glutamina, Magnesio, Calcio, Zinc, Selenio.', testimonial:'Protección inmunológica para toda la familia.' },
+      { id:'gravilife', name:'Gravi-Life', cat:'articular', price:108940, pts:2.5, system:'Sistema Óseo & Celular', invima:'SD2018-0004239', img:makeBottleSVG('G','RAVI-LIFE','#1E7E34','60 Tabletas','2.5 Puntos'), desc:'Guanábana y Cúrcuma para aliviar dolores articulares, musculares y migrañas.', usage:'2 tabletas en ayunas con agua (o 2 de inmediato en migraña).', nutrition:'Guanábana 600mg, Tomate 200mg, Cúrcuma 140mg, Vitaminas C y E.', testimonial:'Alivio efectivo en dolores articulares crónicos.' },
+      { id:'jufres', name:'Jufres', cat:'articular', price:108940, pts:2.5, system:'Piel, Acné & Rosácea', invima:'SD2018-0004228', img:makeBottleSVG('J','UFRES','#B81D24','60 Tabletas','2.5 Puntos'), desc:'Combate acné, rosácea, dermatitis y manchas en el rostro con arándano, zanahoria, zinc y luteína.', usage:'2 tabletas en ayunas.', nutrition:'Zanahoria 426mg, Arándano 120mg, Vitamina C 200%, Vitamina E, Zinc, Luteína.', testimonial:'Juanita Gómez (18 años): piel limpia de acné en 15 días.' },
+      { id:'libilife', name:'Libi-Life', cat:'endocrino', price:108940, pts:2.5, system:'Sistema Reproductivo & Vigor', invima:'SD2019-0004419', img:makeBottleSVG('L','IBI-LIFE','#9B1B30','60 Cápsulas','2.5 Puntos'), desc:'Aumenta fuerza, libido, potencia sexual y rendimiento deportivo reduciendo el estrés.', usage:'1 o 2 cápsulas después del desayuno o 20 min antes de la actividad.', nutrition:'Maca 276mg, L-Arginina 240mg, Guaraná 200mg, Taurina, Zinc.', testimonial:'Vitalidad física y reproductiva natural.' },
+      { id:'lifedig', name:'Life-Dig', cat:'digestivo', price:108940, pts:2.5, system:'Colon Irritable & Digestión', invima:'SD2018-0004231', img:makeBottleSVG('L','IFE-DIG','#7A4928','60 Cápsulas','2.5 Puntos'), desc:'Alivia colon irritable, estreñimiento, acidez, inflamación y hemorroides.', usage:'1 cápsula después del desayuno y 1 después de la comida.', nutrition:'Psyllium, Linaza, Alfalfa, Papaya, Sábila Aloe Vera, L-Glutamina.', testimonial:'Desinflamación digestiva desde la primera semana.' },
+      { id:'vidlife', name:'Vid-Life', cat:'circulatorio', price:108940, pts:2.5, system:'Circulación & Venas Várices', invima:'SD2012-0002444', img:makeBottleSVG('V','ID-LIFE','#6A2C70','60 Cápsulas','2.5 Puntos'), desc:'Antioxidante de Uva Vitis Vinífera que previene y disminuye venas várices, arañitas y calambres.', usage:'1 cápsula después del almuerzo (con estómago lleno).', nutrition:'Uva Vitis Vinífera 400mg, Selenio, Zinc, Vitamina C.', testimonial:'Testimonio Ramiro (Medellín): mejora notable en venas várices.' },
+      { id:'vaslife', name:'Vas-Life', cat:'circulatorio', price:117655, pts:2.7, system:'Cardiovascular & Presión', invima:'SD2024-0004733', img:makeBottleSVG('V','AS-LIFE','#2B8A9E','60 Cápsulas','2.7 Puntos'), desc:'Regula la presión arterial, previene coágulos y mejora la circulación coronaria.', usage:'1 cápsula después del desayuno o almuerzo.', nutrition:'Ajo 318mg, Perejil 220mg, Sésamo 200mg, Limón, Omega 3.', testimonial:'Bienestar arterial y cardiovascular.' },
+      { id:'agymm', name:'Agy-MM', cat:'articular', price:152156, pts:3.5, system:'Masa Muscular & Fuerza', invima:'SD2024-0004723', img:makeBottleSVG('A','GY-MM','#C82333','Polvo 500g','3.5 Puntos'), desc:'Aminoácidos y proteína para ganancia muscular magra y recuperación post-entreno.', usage:'1 o 2 cucharadas diarias en agua, jugo o leche.', nutrition:'Quinua, Soya, Avena, Amaranto, Chía, Magnesio, Calcio, Vitamina D.', testimonial:'Resultados reales en gimnasio.' },
+      { id:'reglu', name:'Reglu', cat:'circulatorio', price:108940, pts:2.5, system:'Control de Glucosa & Azúcar', invima:'SD2024-0004813', img:makeBottleSVG('R','EGLU','#5E2B7A','60 Cápsulas','2.5 Puntos'), desc:'Regula los niveles de glucosa en sangre y mejora la sensibilidad a la insulina.', usage:'2 cápsulas diarias después del desayuno.', nutrition:'Yacón 800mg, Cromo, Vitamina B1.', testimonial:'Estabilidad en niveles de azúcar.' },
+      { id:'protecr', name:'ProtecR', cat:'inmune', price:113298, pts:2.6, system:'Respiratorio & Gripe', invima:'NSA-0015860-2024', img:makeBottleSVG('P','ROTECR','#D9731A','25 Sobres','2.6 Puntos'), desc:'Alivia congestión nasal, gripe y resfriados con piña/frutos rojos, limón y jengibre.', usage:'1 sobre en agua tibia o caliente.', nutrition:'Jengibre, Limón, Hierbabuena, Vitamina C, Zinc, Selenio.', testimonial:'Descongestión natural reconfortante.' },
+      { id:'flavormix', name:'Flavormix', cat:'circulatorio', price:113298, pts:2.6, system:'Salud Renal & Riñones', invima:'NSA-0015860-2024 V10', img:makeBottleSVG('F','LAVORMIX','#C85A17','25 Sobres','2.6 Puntos'), desc:'Efecto diurético natural, regula pH urinario y previene cálculos renales.', usage:'1 sobre en 200ml de agua.', nutrition:'Ciruela, Pitahaya, Inulina, Magnesio, Zinc.', testimonial:'Detoxificación y cuidado renal.' },
+      { id:'stemix', name:'Stemix', cat:'circulatorio', price:113298, pts:2.6, system:'Sistema Linfático & Drenaje', invima:'NSA-0015860-2024 V7', img:makeBottleSVG('S','TEMIX','#4B3B75','25 Sobres','2.6 Puntos'), desc:'Drenaje linfático, eliminación de líquidos y toxinas con espinaca, pepino, piña y apio.', usage:'1 sobre en 200ml de agua.', nutrition:'Piña, Pepino, Espinaca, Apio, Vitaminas A, C, D, E.', testimonial:'Desinflamación y ligereza corporal.' },
+      { id:'zentoni', name:'Zentoni', cat:'nervioso', price:113298, pts:2.6, system:'Salud Mental, Estrés & Sueño', invima:'NSA-0015860-2024 V11', img:makeBottleSVG('Z','ENTONI','#1F6F54','25 Sobres','2.6 Puntos'), desc:'Disminuye ansiedad, estrés mental e insomnio promoviendo sueño reparador.', usage:'1 sobre en agua fría o caliente.', nutrition:'Manzanilla, Hierbabuena, Tomillo, Menta, Vitamina D y C.', testimonial:'Calma mental y descanso profundo.' },
+      { id:'movilife', name:'Movi-Life Perros', cat:'mascotas', price:98000, pts:2.0, system:'Mascotas · Articular Perros', invima:'NaturalPet\'s', img:makeBottleSVG('M','OVI-LIFE','#2E8B22','50 Masticables','Perros'), desc:'Mejora movilidad articular, previene artritis y da brillo al pelaje de tu perro.', usage:'1/2 a 2 unidades al día según peso.', nutrition:'Glucosamina, Condroitina, Colágeno.', testimonial:'Perros activos y sin dolor articular.' },
+      { id:'fortilife', name:'Forti-Life Perros', cat:'mascotas', price:89000, pts:2.0, system:'Mascotas · Digestivo Perros', invima:'NaturalPet\'s', img:makeBottleSVG('F','ORTI-LIFE','#3B7A23','Snacks 200g','Perros'), desc:'Equilibra flora intestinal, reduce mal aliento y gases en perros.', usage:'3 a 14 galletas al día según raza.', nutrition:'Probióticos, Prebióticos, Cúrcuma, Hierro.', testimonial:'Digestión feliz para tu perro.' },
+      { id:'catglow', name:'Cat-Glow Gatos', cat:'mascotas', price:79000, pts:1.8, system:'Mascotas · Inmune Gatos', invima:'NaturalPet\'s', img:makeBottleSVG('C','AT-GLOW','#1B365D','Snacks 40g','Gatos'), desc:'Snacks sabor salmón con Omega 3-6 y Ganoderma para defensas y pelaje.', usage:'3 a 8 unidades al día.', nutrition:'Omega 3 y 6, Ganoderma, Prebióticos.', testimonial:'Sabor irresistible para gatos.' },
+      { id:'catflex', name:'Cat-Flex Gatos', cat:'mascotas', price:94000, pts:2.0, system:'Mascotas · Articular Gatos', invima:'NaturalPet\'s', img:makeBottleSVG('C','AT-FLEX','#243B67','80 Masticables','Gatos'), desc:'Salud articular, visión (taurina) y vitalidad felina.', usage:'2 a 4 unidades al día.', nutrition:'Colágeno, Taurina, Omega 3.', testimonial:'Agilidad y vista felina.' }
+    ];
+
+    const COMBOS_DB = [
+      { name:'Combo Control de Peso Estrella', items:'Maca-Life + Divi-Her', price:239669, pts:5.5, desc:'Desinflama el colon, acelera el metabolismo, equilibra la tiroides y elimina grasa localizada.' },
+      { name:'Combo Sistema Circulatorio', items:'Vid-Life + Gravi-Life', price:217880, pts:5.0, desc:'Oxigena la sangre, previene y elimina venas várices y alivia dolores crónicos.' },
+      { name:'Combo Sistema Digestivo', items:'Life-Dig + Divi-Her', price:239669, pts:5.5, desc:'Ideal para colon irritable, gastritis, estreñimiento y pérdida de peso.' },
+      { name:'Combo Sistema Endocrino', items:'Gravi-Life + Maca-Life', price:217880, pts:5.0, desc:'Equilibra glándula tiroides, ovarios poliquísticos y síntomas de menopausia.' },
+      { name:'Combo Sistema Reproductivo', items:'Libi-Life + Maca-Life', price:217880, pts:5.0, desc:'Potenciador sexual natural, fertilidad y energía en hombres y mujeres.' },
+      { name:'Combo Piel & Rejuvenecimiento', items:'Ju-Vent + Jufres', price:283245, pts:6.5, desc:'Combate el acné, manchas y rosácea devolviendo firmeza y colágeno.' },
+      { name:'Combo Sistema Inmunológico', items:'Protec-Life + Gravi-Life', price:283245, pts:6.5, desc:'Factor de transferencia para subir defensas en alergias, asma, lupus y vitíligo.' },
+      { name:'Combo Sistema Nervioso', items:'Agy-Fort + Libi-Life', price:239669, pts:5.5, desc:'Fuente de energía natural, concentración, memoria y jornadas largas.' },
+      { name:'Combo Sistema Muscular', items:'Ju-Vent + Agy-MM', price:326461, pts:7.5, desc:'Fuerza, definición muscular limpia y protección de articulaciones.' },
+      { name:'Combo Sistema Cardiovascular', items:'Vas-Life + Gravi-Life', price:226595, pts:5.2, desc:'Regula presión arterial, previene coágulos y mejora función cardíaca.' }
+    ];
+
+    const RANKS_DB = [
+      { title:'01. EMPRESARIO LIFE', gem:'life', tag:'1er Título · 40%', pts:400, plat:0, pct:2, req:'400+ Puntos personales', desc:'40% de descuento fijo en todas tus compras + diferenciales del 4% al 20%.' },
+      { title:'02. LIFE PLATINO', gem:'platino', tag:'2do Título · 2 Gen', pts:400, plat:1, pct:2.5, req:'300 pts red No Life + 200 pts personales', desc:'Bono $300.000 + Kit $300.000 + Regalías 1% a 4% en 1ra y 2da generación.' },
+      { title:'03. LIFE ZAFIRO', gem:'zafiro', tag:'3er Título · 3 Gen', pts:400, plat:4, pct:3, req:'4 Life Platino en 1ra Gen + 12 Life en 2da Gen', desc:'Bono $3.000.000 + Bono Liderazgo $3.456.000 + Joya Oro 18K Zafiro + 3 Generaciones.' },
+      { title:'04. LIFE ESMERALDA', gem:'esmeralda', tag:'4to Título · 4 Gen', pts:400, plat:8, pct:3.5, req:'8 Life Platino en 1ra Gen + 24 Life en 2da Gen', desc:'Bono $5.000.000 + Bono Liderazgo $3.456.000 + Joya Oro 18K Esmeralda + 4 Generaciones.' },
+      { title:'05. LIFE DIAMANTE', gem:'diamante', tag:'5to Título · 5 Gen', pts:400, plat:12, pct:4, req:'12 Life Platino en 1ra Gen + 36 Life en 2da Gen', desc:'Bono $10.000.000 + Bono Liderazgo $3.456.000 + Joya Oro 18K Diamante + 5 Generaciones.' },
+      { title:'06. DOBLE DIAMANTE', gem:'diamante', tag:'6to Título · 6 Gen', pts:400, plat:16, pct:4, req:'16 Life Platino en 1ra Gen + 48 Life en 2da Gen', desc:'Bono $15.000.000 + Bono Liderazgo $3.456.000 + Joya Oro 18K + 6 Generaciones.' }
+    ];
+
+    const RECIPES_DB = [
+      { cat:'desayunos', title:'Parfait Lifehuni', prod:'Protec-Life Vainilla', prodId:'proteclife', servings:'3 porciones', ing:'1.5 tazas yogurt griego, 1 scoop Protec-Life vainilla, 1/4 taza granola, fresas, arándanos y miel.', prep:'Mezcla el yogurt con el scoop de Protec-Life. Arma capas en copa de vidrio con fruta y granola.' },
+      { cat:'desayunos', title:'Smoothie Bowl de Frutas', prod:'Ju-Vent Fresa', prodId:'juvent', servings:'1 porción', ing:'1 vaso leche de almendras, 1 scoop Ju-Vent fresa, 1 banano congelado, fresas, arándanos y coco.', prep:'Licúa la leche, Ju-Vent y banano hasta lograr textura cremosa. Sirve en bowl y decora.' },
+      { cat:'desayunos', title:'Pancakes Funcionales', prod:'Protec-Life Vainilla', prodId:'proteclife', servings:'4 porciones', ing:'1 taza harina, 1 scoop Protec-Life vainilla, 1 taza leche, 1 huevo, mantequilla y arándanos.', prep:'Mezcla los secos con Protec-Life, incorpora leche y huevo y dora 3 min por lado.' },
+      { cat:'panaderia', title:'Pan de Avena y Lentejas', prod:'Agy-Fort Vainilla', prodId:'agyfort', servings:'14 porciones', ing:'1 taza avena, 1 taza lentejas, 1 scoop Agy-Fort vainilla, albahaca, orégano, aceite de oliva.', prep:'Procesa avena y lentejas, suma Agy-Fort y especias con agua, forma tortitas y asa 5 min por lado.' },
+      { cat:'panaderia', title:'Pan de Banano en Airfryer', prod:'Ju-Vent Vainilla', prodId:'juvent', servings:'Molde familiar', ing:'3 bananos, 2 tazas harina de avena, 3 scoops Ju-Vent vainilla, 2 huevos, canela y nueces.', prep:'Integra los bananos con los huevos y la mezcla de avena con Ju-Vent. Hornea 30 min a 180°C.' },
+      { cat:'postres', title:'Donas de Zanahoria Saludables', prod:'Protec-Life + Ju-Vent', prodId:'proteclife', servings:'8 donas', ing:'160g zanahoria, 2 huevos, yogurt griego, 120g harina de avena, 2 scoops Protec-Life vainilla.', prep:'Licúa húmedos, une con secos y hornea 15 min a 180°C. Cubre con frosting de yogurt y Ju-Vent.' },
+      { cat:'empresarios', title:'Explosión Pacífico Colombiano', author:'Deborah Moscoso · Empresaria LIFE PLATINO', prod:'Agy-Fort Naranja', prodId:'agyfort', servings:'2 vasos', ing:'4 chontaduros, 1 cda borojó, 2 scoops Agy-Fort naranja, 1 taza leche de coco y 1 taza agua.', prep:'Licúa los chontaduros, borojó, leche de coco y los 2 scoops de Agy-Fort naranja.' },
+      { cat:'empresarios', title:'Smoothie Bowl de Éxito', author:'Ana María Cañón · Empresaria LIFE PLATINO', prod:'Protec-Life Vainilla', prodId:'proteclife', servings:'1 bowl', ing:'1 taza banano, fresas, arándanos, leche vegetal, 1 scoop Protec-Life vainilla, chía y kiwi.', prep:'Licúa las frutas con la leche y Protec-Life vainilla. Decora con semillas de chía y almendras.' },
+      { cat:'empresarios', title:'Pudín Proteico de Avena', author:'Daniela Agudelo · Empresaria LIFE PLATINO', prod:'Protec-Life Vainilla', prodId:'proteclife', servings:'2 copas', ing:'2 tazas leche, 1 taza avena, 1 scoop Protec-Life vainilla, 4 fresas y chocolate sin azúcar.', prep:'Licúa todo, refrigera por 30 minutos hasta tomar consistencia de pudín y decora con arándanos.' }
+    ];
+
+    function renderHenriettaStrip() {
+      const top4 = PRODUCTS_DB.slice(0, 4);
+      document.getElementById('henrietta-strip').innerHTML = top4.map(p => `
+        <div onclick="openProductModal('${p.id}')" onmouseenter="showPill('ABRIR FICHA ${p.name.toUpperCase()}')" onmouseleave="hidePill()" class="henrietta-col relative cursor-pointer border-b sm:border-r border-nexalia-charcoal/20 flex flex-col">
+          <div class="h-56 w-full" style="background:${p.bg}"></div>
+          <div class="h-64 bg-nexalia-bone w-full flex flex-col items-center justify-end pb-8 px-4">
+            <p class="text-xs font-bold uppercase tracking-widest text-nexalia-charcoal/60 mt-16">${p.system} · ${p.pts} Pts</p>
+            <p class="font-poster text-2xl text-nexalia-charcoal mt-1">$${p.price.toLocaleString('es-CO')} COP</p>
+          </div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+            <img class="henrietta-jar w-48 sm:w-52 h-auto drop-shadow-[0_20px_20px_rgba(0,0,0,0.35)]" src="${p.img}" alt="${p.name}" />
+            <div class="henrietta-tape text-white font-poster text-2xl tracking-wider uppercase px-8 py-2 -mt-6" style="background:${p.tape}">${p.name}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderRanksGrid() {
+      document.getElementById('ranks-grid').innerHTML = RANKS_DB.map((r, i) => `
+        <div onclick="setSimPreset(${r.pts}, ${r.plat}, ${r.pct})" class="cursor-pointer ${i===5?'bg-nexalia-charcoal text-white border-nexalia-amber':'bg-white text-nexalia-charcoal border-nexalia-charcoal/10'} rounded-3xl p-7 border-2 hover:border-nexalia-amber transition-all">
+          <div class="flex items-center justify-between mb-4">
+            <img src="${GEMS_MAP[r.gem]}" class="w-16 h-16 object-contain" alt="" />
+            <span class="px-3 py-1 rounded-full bg-nexalia-amber/20 text-nexalia-amber font-extrabold text-xs">${r.tag}</span>
+          </div>
+          <h4 class="giant-poster-text text-3xl">${r.title}</h4>
+          <p class="text-xs font-bold text-nexalia-terracotta mt-1 mb-2">Requisito: ${r.req}</p>
+          <p class="text-xs opacity-80">${r.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function refreshAllVisuals() {
+      document.querySelectorAll('.img-diviher').forEach(el => el.src = PRODUCTS_DB[0].img);
+      document.querySelectorAll('.img-macalife').forEach(el => el.src = PRODUCTS_DB[1].img);
+      document.querySelectorAll('.img-juvent').forEach(el => el.src = PRODUCTS_DB[2].img);
+      document.querySelectorAll('.img-agyfort').forEach(el => el.src = PRODUCTS_DB[3].img);
+      document.querySelectorAll('.img-gem-esmeralda').forEach(el => el.src = GEMS_MAP.esmeralda);
+      renderHenriettaStrip();
+      renderRanksGrid();
+      filterCatalog('all');
+      runFullSimulator();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const leafSVG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="70" fill="#104F25" fill-opacity="0.14"/><path d="M50 125 Q100 25 150 125 Z" fill="#2E8B22" fill-opacity="0.75"/><circle cx="70" cy="70" r="9" fill="#D3930F"/></svg>');
+      document.querySelectorAll('.img-splash').forEach(el => el.src = leafSVG);
+      document.querySelectorAll('.img-maca-roots').forEach(el => el.src = leafSVG);
+      document.querySelectorAll('.img-pets').forEach(el => el.src = makeGemSVG('#D3930F','#104F25','MASCOTAS'));
+      document.querySelectorAll('.img-leaders').forEach(el => el.src = makeGemSVG('#104F25','#003810','NANCY & FELIPE'));
+      refreshAllVisuals();
+      renderQuiz(1);
+      filterRecipes('all');
+      renderCart();
+    });
+
+    // Rotación de los frascos al hacer scroll
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const jarL = document.getElementById('hero-jar-left');
+      const jarR = document.getElementById('hero-jar-right');
+      const word = document.getElementById('hero-giant-word');
+      if (jarL && jarR) {
+        jarL.style.transform = `translate3d(${-y * 0.12}px, ${y * 0.07}px, 0) rotate(${-9 - y * 0.05}deg)`;
+        jarR.style.transform = `translate3d(${y * 0.12}px, ${18 - y * 0.05}px, 0) rotate(${8 + y * 0.05}deg)`;
+      }
+      if (word) word.style.transform = `translateX(${-y * 0.18}px)`;
+    });
+
+    const pill = document.getElementById('agrumea-cursor-pill');
+    const pillTxt = document.getElementById('cursor-pill-text');
+    window.addEventListener('mousemove', (e) => { if (pill) { pill.style.left = e.clientX + 'px'; pill.style.top = e.clientY + 'px'; } });
+    function showPill(t) { if (pillTxt) pillTxt.textContent = t; if (pill) pill.classList.add('active'); }
+    function hidePill() { if (pill) pill.classList.remove('active'); }
+
+    function toggleMenu() { document.getElementById('fullscreen-menu').classList.toggle('open'); }
+    function navigateTo(page) {
+      ['home', 'tienda', 'negocio', 'recetas'].forEach(p => document.getElementById('page-' + p).classList.add('hidden'));
+      document.getElementById('page-' + page).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function scrollToQuizFromAnywhere() {
+      document.getElementById('fullscreen-menu').classList.remove('open');
+      navigateTo('tienda');
+      setTimeout(() => document.getElementById('quiz-anchor').scrollIntoView({ behavior: 'smooth' }), 200);
+    }
+
+    function loadLogoFile(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const img = document.getElementById('custom-logo-img');
+      img.src = URL.createObjectURL(f); img.classList.remove('hidden');
+      document.getElementById('default-logo-svg').classList.add('hidden');
+    }
+    function swapImg(e, selector, prodId) {
+      const f = e.target.files[0]; if (!f) return;
+      const url = URL.createObjectURL(f);
+      document.querySelectorAll(selector).forEach(el => el.src = url);
+      if (prodId) {
+        const p = PRODUCTS_DB.find(x => x.id === prodId);
+        if (p) p.img = url;
+        refreshAllVisuals();
+      }
+    }
+    function swapGem(e, gemKey) {
+      const f = e.target.files[0]; if (!f) return;
+      GEMS_MAP[gemKey] = URL.createObjectURL(f);
+      refreshAllVisuals();
+    }
+
+    function filterCatalog(cat, btnEl) {
+      if (btnEl) {
+        document.querySelectorAll('.store-filter-btn').forEach(b => b.className = 'store-filter-btn bg-white border border-nexalia-charcoal/20 px-4 py-2.5 rounded-full font-bold text-xs uppercase');
+        btnEl.className = 'store-filter-btn bg-nexalia-charcoal text-white px-5 py-2.5 rounded-full font-extrabold text-xs uppercase';
+      }
+      const grid = document.getElementById('catalog-grid');
+      if (cat === 'combos') {
+        grid.innerHTML = COMBOS_DB.map(c => `
+          <div class="bg-nexalia-charcoal text-white rounded-[2rem] p-8 border-2 border-nexalia-amber flex flex-col justify-between shadow-xl">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-[11px] uppercase">★ Combinación Perfecta · ${c.pts} Pts</span>
+              <h3 class="giant-poster-text text-4xl mt-4 mb-1">${c.name}</h3>
+              <p class="font-serif italic text-2xl text-nexalia-amber mb-3">${c.items}</p>
+              <p class="text-sm text-white/80 mb-6">${c.desc}</p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-white/15">
+              <span class="giant-poster-text text-3xl text-nexalia-amber">$${c.price.toLocaleString('es-CO')}</span>
+              <button type="button" onclick="addToCart('${c.name}', ${c.price}, ${c.pts})" class="px-5 py-3 rounded-full bg-nexalia-amber text-nexalia-charcoal font-extrabold text-xs uppercase">+ Agregar Combo</button>
+            </div>
+          </div>`).join('');
+        return;
+      }
+      const list = cat === 'all' ? PRODUCTS_DB : PRODUCTS_DB.filter(p => p.cat === cat);
+      grid.innerHTML = list.map(p => `
+        <div onclick="openProductModal('${p.id}')" onmouseenter="showPill('VER FICHA TÉCNICA')" onmouseleave="hidePill()" class="group bg-white rounded-[2rem] p-7 border-2 border-nexalia-charcoal/10 hover:border-nexalia-green cursor-pointer transition-all hover:-translate-y-2 shadow-sm hover:shadow-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="px-3 py-1 rounded-full bg-nexalia-boneDark font-extrabold text-[10px] uppercase">${p.system}</span>
+              <span class="font-bold text-xs text-nexalia-green">${p.pts} Pts</span>
+            </div>
+            <div class="h-56 bg-nexalia-bone rounded-[130px_130px_20px_20px] flex items-center justify-center mb-5 overflow-hidden">
+              <img src="${p.img}" alt="${p.name}" class="w-40 h-auto drop-shadow-xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6" />
+            </div>
+            <h3 class="giant-poster-text text-4xl text-nexalia-charcoal mb-2">${p.name}</h3>
+            <p class="text-xs text-nexalia-charcoal/75 mb-4">${p.desc}</p>
+          </div>
+          <div class="pt-4 border-t border-nexalia-boneDark flex items-center justify-between" onclick="event.stopPropagation()">
+            <span class="giant-poster-text text-3xl text-nexalia-green">$${p.price.toLocaleString('es-CO')}</span>
+            <button type="button" onclick="addToCart('${p.name}', ${p.price}, ${p.pts})" class="px-5 py-3 rounded-full bg-nexalia-green text-white hover:bg-nexalia-amber hover:text-nexalia-charcoal font-extrabold text-xs uppercase">+ Carrito</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function openProductModal(id) {
+      const p = PRODUCTS_DB.find(x => x.id === id) || PRODUCTS_DB[0];
+      document.getElementById('mdl-system').textContent = p.system;
+      document.getElementById('mdl-img').src = p.img;
+      document.getElementById('mdl-title').textContent = p.name;
+      document.getElementById('mdl-invima').textContent = 'Registro INVIMA: ' + p.invima;
+      document.getElementById('mdl-desc').textContent = p.desc;
+      document.getElementById('mdl-price').textContent = '$' + p.price.toLocaleString('es-CO') + ' COP';
+      document.getElementById('mdl-points').textContent = p.pts + ' Puntos';
+      document.getElementById('mdl-usage').textContent = p.usage;
+      document.getElementById('mdl-nutrition').textContent = p.nutrition;
+      document.getElementById('mdl-testimonial').textContent = p.testimonial;
+      document.getElementById('mdl-add-btn').onclick = () => { addToCart(p.name, p.price, p.pts); closeProductModal(); };
+      document.getElementById('product-drawer').classList.remove('hidden');
+    }
+    function closeProductModal() { document.getElementById('product-drawer').classList.add('hidden'); }
+
+    function renderQuiz(step, choice) {
+      const body = document.getElementById('quiz-body');
+      const ind = document.getElementById('quiz-step-indicator');
+      if (step === 1) {
+        ind.textContent = 'Paso 1 de 3';
+        body.innerHTML = `<h4 class="font-serif italic text-3xl mb-6">1. ¿A quién queremos cuidar hoy?</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button type="button" onclick="renderQuiz(2,'humano')" class="p-6 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><span class="giant-poster-text text-3xl block mb-1">PARA MÍ O MI PAREJA</span><span class="text-xs opacity-80">Peso, hormonas, energía, piel o digestión.</span></button>
+            <button type="button" onclick="renderQuiz(2,'familia')" class="p-6 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><span class="giant-poster-text text-3xl block mb-1">DEFENSAS Y FAMILIA</span><span class="text-xs opacity-80">Niños, adultos mayores y vías respiratorias.</span></button>
+            <button type="button" onclick="renderQuiz(3,'mascotas')" class="p-6 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><span class="giant-poster-text text-3xl block mb-1">MI PERRO O GATO</span><span class="text-xs opacity-80">Línea NaturalPet's: movilidad y pelaje.</span></button>
+          </div>`;
+      } else if (step === 2) {
+        ind.textContent = 'Paso 2 de 3';
+        body.innerHTML = `<h4 class="font-serif italic text-3xl mb-6">2. ¿Cuál es tu objetivo principal de bienestar?</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button type="button" onclick="renderQuiz(3,'peso')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">BAJAR DE PESO Y MEDIDAS</strong><span class="text-xs">Grasa localizada y metabolismo.</span></button>
+            <button type="button" onclick="renderQuiz(3,'hormonal')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">TIROIDES Y HORMONAS</strong><span class="text-xs">Ciclo, menopausia o SOP.</span></button>
+            <button type="button" onclick="renderQuiz(3,'piel')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">PIEL, ACNÉ Y COLÁGENO</strong><span class="text-xs">Manchas, cabello y articulaciones.</span></button>
+            <button type="button" onclick="renderQuiz(3,'energia')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">ENERGÍA, MENTE Y SUEÑO</strong><span class="text-xs">Cansancio, anemia o insomnio.</span></button>
+            <button type="button" onclick="renderQuiz(3,'circulacion')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">VÁRICES, PRESIÓN O AZÚCAR</strong><span class="text-xs">Circulación o control de glucosa.</span></button>
+            <button type="button" onclick="renderQuiz(3,'defensas')" class="p-5 rounded-2xl bg-white/10 hover:bg-nexalia-amber hover:text-nexalia-charcoal text-left border border-white/15"><strong class="font-poster text-2xl block">DEFENSAS E INMUNIDAD</strong><span class="text-xs">Alergias, rinitis o gripes.</span></button>
+          </div>`;
+      } else {
+        ind.textContent = '¡Resultado Listo!';
+        const map = {
+          peso: ['Combo Control de Peso (Maca-Life + Divi-Her)', 239669, 5.5, 'Divi-Her actúa como bypass natural eliminando grasa localizada mientras Maca-Life equilibra tiroides y metabolismo.'],
+          hormonal: ['Combo Endocrino (Gravi-Life + Maca-Life)', 217880, 5.0, 'Regula la función tiroidea y hormonal, disminuye cólicos y previene ovarios poliquísticos.'],
+          piel: ['Combo Piel & Colágeno (Ju-Vent + Jufres)', 283245, 6.5, 'Ju-Vent aporta colágeno hidrolizado articular y dérmico mientras Jufres combate el acné y manchas.'],
+          energia: ['Combo Energía & Descanso (Agy-Fort + Zentoni)', 244027, 5.6, 'Agy-Fort combate la anemia y cansancio de día y Zentoni relaja tu mente para dormir profundo.'],
+          circulacion: ['Combo Circulatorio (Vid-Life + Gravi-Life)', 217880, 5.0, 'Oxigena la sangre, disminuye venas várices, calambres y retención de líquidos.'],
+          defensas: ['Combo Inmunológico (Protec-Life + ProtecR)', 287603, 6.6, 'Calostro bovino + jengibre y vitamina C para blindar las defensas de toda la familia.'],
+          mascotas: ['Kit Mascotas Felices (Movi-Life + Forti-Life)', 187000, 4.0, 'Protege sus articulaciones, pelaje y flora digestiva con colágeno y probióticos.']
+        };
+        const r = map[choice] || map.peso;
+        body.innerHTML = `<div class="bg-white text-nexalia-charcoal rounded-3xl p-8 border-2 border-nexalia-amber">
+          <span class="text-xs font-extrabold uppercase text-nexalia-terracotta">DIAGNÓSTICO PERSONALIZADO NEXALIA</span>
+          <h4 class="giant-poster-text text-4xl sm:text-5xl text-nexalia-green mt-1 mb-3">${r[0]}</h4>
+          <p class="text-sm text-nexalia-charcoal/80 mb-6">${r[3]}</p>
+          <div class="flex flex-wrap gap-4">
+            <button type="button" onclick="addToCart('${r[0]}', ${r[1]}, ${r[2]})" class="px-7 py-4 rounded-full bg-nexalia-green text-white font-extrabold text-xs uppercase">+ Agregar Recomendación ($${r[1].toLocaleString('es-CO')} COP)</button>
+            <button type="button" onclick="renderQuiz(1)" class="px-6 py-4 rounded-full bg-nexalia-boneDark font-bold text-xs uppercase">Repetir Test</button>
+          </div>
+        </div>`;
+      }
+    }
+
+    function setSimPreset(pts, plat, pct) {
+      document.getElementById('rng-personal-pts').value = pts;
+      document.getElementById('rng-platinos').value = plat;
+      document.getElementById('rng-red-pct').value = pct;
+      runFullSimulator();
+      document.getElementById('rank-up-banner').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function runFullSimulator() {
+      const pts = parseInt(document.getElementById('rng-personal-pts').value);
+      const plat = parseInt(document.getElementById('rng-platinos').value);
+      const pct = parseFloat(document.getElementById('rng-red-pct').value);
+
+      let disc = 0.20;
+      if (pts >= 400) disc = 0.40;
+      else if (pts >= 320) disc = 0.36;
+      else if (pts >= 240) disc = 0.32;
+      else if (pts >= 160) disc = 0.28;
+      else if (pts >= 80) disc = 0.24;
+
+      let rName = 'EMPRESARIO EN FORMACIÓN (' + Math.round(disc*100) + '%)';
+      let rMsg = 'Llega a 400 puntos personales para alcanzar el 40% (Empresario LIFE) y desbloquear los bonos de liderazgo.';
+      let rBonus = 'Rentabilidad directa ' + Math.round(disc*100) + '%';
+      let rGens = 'Sube a 400 pts para cobrar generaciones';
+      let rReq = 'Acumular 400 puntos personales con tu código.';
+      let bonusCash = 0, gem = GEMS_MAP.life, gens = 0;
+
+      if (pts >= 400 && plat === 0) {
+        rName = 'EMPRESARIO LIFE (40%)';
+        rMsg = '¡Ya estás al 40% máximo de rentabilidad! Ahora forma tu primer líder para subir a Life Platino.';
+        rBonus = 'Diploma Oficial + 40% Fijo'; rGens = 'Diferenciales del 4% al 20%';
+        rReq = '400+ puntos personales cumplidos.';
+      } else if (pts >= 400 && plat >= 1 && plat < 4) {
+        rName = '¡SUBISTE A LIFE PLATINO!';
+        rMsg = 'Desbloqueas regalías residuales del 1% al 4% en 1ra y 2da generación.';
+        rBonus = 'Bono $300.000 + Kit $300.000'; rGens = 'Cobras 1ra y 2da Generación (' + pct + '%)';
+        rReq = 'Cerrar como Life + 300 pts red No Life y 200 pts personales.';
+        bonusCash = 600000; gem = GEMS_MAP.platino; gens = 2;
+      } else if (pts >= 400 && plat >= 4 && plat < 8) {
+        rName = '¡SUBISTE A LIFE ZAFIRO!';
+        rMsg = '¡Salto de liderazgo! Con 4 Life Platino en 1ra línea y 12 Empresarios Life en 2da línea recibes Joya de Oro 18K.';
+        rBonus = 'Bono $3.000.000 + Liderazgo $3.456.000 + Joya 18K'; rGens = 'Cobras 1ra a 3ra Generación (' + pct + '%)';
+        rReq = '4 empresarios Life Platino en 1ra generación + 12 empresarios Life en 2da generación.';
+        bonusCash = 6456000; gem = GEMS_MAP.zafiro; gens = 3;
+      } else if (pts >= 400 && plat >= 8 && plat < 12) {
+        rName = '¡SUBISTE A LIFE ESMERALDA!';
+        rMsg = '¡Nivel Esmeralda alcanzado! Recibes Bono de $5 Millones + Bono Liderazgo + Joya Oro 18K con Esmeralda.';
+        rBonus = 'Bono $5.000.000 + Liderazgo $3.456.000 + Joya 18K'; rGens = 'Cobras 1ra a 4ta Generación (' + pct + '%)';
+        rReq = '8 empresarios Life Platino en 1ra generación + 24 empresarios Life en 2da generación.';
+        bonusCash = 8456000; gem = GEMS_MAP.esmeralda; gens = 4;
+      } else if (pts >= 400 && plat >= 12 && plat < 16) {
+        rName = '¡SUBISTE A LIFE DIAMANTE!';
+        rMsg = '¡Cima empresarial! Desbloqueas Bono de $10 Millones + Bono Liderazgo + Joya Oro 18K con Diamante.';
+        rBonus = 'Bono $10.000.000 + Liderazgo $3.456.000 + Joya 18K'; rGens = 'Cobras 1ra a 5ta Generación (' + pct + '%)';
+        rReq = '12 empresarios Life Platino en 1ra generación + 36 empresarios Life en 2da generación.';
+        bonusCash = 13456000; gem = GEMS_MAP.diamante; gens = 5;
+      } else if (pts >= 400 && plat >= 16) {
+        rName = '¡CORONASTE LIFE DOBLE DIAMANTE!';
+        rMsg = '¡Máximo rango de Lifehuni! Recibes Bono de $15 Millones + Bono Liderazgo + Joya 18K Doble Diamante.';
+        rBonus = 'Bono $15.000.000 + Liderazgo $3.456.000 + Joya 18K'; rGens = 'Cobras 1ra a 6ta Generación (' + pct + '%)';
+        rReq = '16 empresarios Life Platino en 1ra generación + 48 empresarios Life en 2da generación.';
+        bonusCash = 18456000; gem = GEMS_MAP.diamante; gens = 6;
+      }
+
+      const avgPricePerPt = 43576; // Basado en Divi-Her $130.729 / 3 pts
+      const directVal = Math.round(pts * avgPricePerPt * disc);
+      const diffVal = Math.round((plat + 2) * 180000 * (disc - 0.12));
+      const royaltiesVal = gens > 0 ? Math.round(plat * gens * 420000 * (pct / 100) * 8) : 0;
+      const monthlyTotal = directVal + diffVal + royaltiesVal;
+
+      document.getElementById('lbl-personal-pts').textContent = `${pts} PTS (${Math.round(disc*100)}%)`;
+      document.getElementById('lbl-platinos').textContent = `${plat} PLATINOS`;
+      document.getElementById('lbl-red-pct').textContent = `${pct.toFixed(1)}%`;
+      document.getElementById('sim-current-gem-img').src = gem;
+      document.getElementById('sim-rank-name').textContent = rName;
+      document.getElementById('sim-rank-message').textContent = rMsg;
+      document.getElementById('sim-rank-bonus').textContent = rBonus;
+      document.getElementById('sim-rank-gens').textContent = rGens;
+      document.getElementById('sim-discount-pill').textContent = 'Rentabilidad ' + Math.round(disc*100) + '%';
+      document.getElementById('sim-monthly-total').textContent = '$' + monthlyTotal.toLocaleString('es-CO') + ' COP';
+      document.getElementById('sim-row-direct').textContent = '$' + directVal.toLocaleString('es-CO') + ' COP';
+      document.getElementById('sim-row-diff').textContent = '$' + diffVal.toLocaleString('es-CO') + ' COP';
+      document.getElementById('sim-row-royalties').textContent = '$' + royaltiesVal.toLocaleString('es-CO') + ' COP';
+      document.getElementById('sim-row-title-bonus').textContent = '$' + bonusCash.toLocaleString('es-CO') + ' COP';
+      document.getElementById('sim-org-req').textContent = rReq;
+    }
+
+    function filterRecipes(cat) {
+      const list = cat === 'all' ? RECIPES_DB : RECIPES_DB.filter(r => r.cat === cat);
+      document.getElementById('recipes-grid').innerHTML = list.map(r => {
+        const p = PRODUCTS_DB.find(x => x.id === r.prodId) || PRODUCTS_DB[0];
+        return `
+          <div class="bg-white rounded-[2rem] p-7 border-2 border-nexalia-charcoal/10 flex flex-col justify-between shadow-sm">
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="px-3 py-1 rounded-full bg-nexalia-green/10 text-nexalia-green font-extrabold text-[10px] uppercase">${r.servings}</span>
+                <span class="text-xs font-bold text-nexalia-terracotta">Con ${r.prod}</span>
+              </div>
+              <h3 class="giant-poster-text text-3xl text-nexalia-charcoal mb-1">${r.title}</h3>
+              ${r.author ? `<p class="text-xs font-extrabold text-nexalia-amber mb-3">★ ${r.author}</p>` : ''}
+              <p class="text-xs font-bold uppercase text-nexalia-charcoal/60 mt-3 mb-1">Ingredientes:</p>
+              <p class="text-xs text-nexalia-charcoal/80 mb-3">${r.ing}</p>
+              <p class="text-xs font-bold uppercase text-nexalia-charcoal/60 mb-1">Preparación:</p>
+              <p class="text-xs text-nexalia-charcoal/80 mb-6">${r.prep}</p>
+            </div>
+            <button type="button" onclick="addToCart('${p.name}', ${p.price}, ${p.pts})" class="w-full py-3.5 rounded-full bg-nexalia-green text-white font-extrabold text-xs uppercase hover:bg-nexalia-amber hover:text-nexalia-charcoal transition-colors">
+              + Comprar ${p.name} ($${p.price.toLocaleString('es-CO')})
+            </button>
+          </div>`;
+      }).join('');
+    }
+
+    let cart = [];
+    function addToCart(name, price, pts) {
+      cart.push({ name, price, pts });
+      renderCart();
+      document.getElementById('cart-drawer').classList.remove('hidden');
+    }
+    function removeCartItem(i) { cart.splice(i, 1); renderCart(); }
+    function toggleCart() { document.getElementById('cart-drawer').classList.toggle('hidden'); }
+    function renderCart() {
+      document.getElementById('cart-badge').textContent = cart.length;
+      const list = document.getElementById('cart-list');
+      if (cart.length === 0) {
+        list.innerHTML = '<p class="text-sm text-nexalia-charcoal/60 py-8 text-center">Tu carrito está vacío. Toca cualquier producto para agregarlo.</p>';
+        document.getElementById('cart-price-total').textContent = '$0 COP';
+        document.getElementById('cart-pts-total').textContent = '0';
+        return;
+      }
+      let total = 0, pts = 0;
+      list.innerHTML = cart.map((item, idx) => {
+        total += item.price; pts += item.pts;
+        return `<div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border border-nexalia-charcoal/10">
+          <div><p class="font-bold text-xs">${item.name}</p><p class="text-xs text-nexalia-green font-extrabold">$${item.price.toLocaleString('es-CO')} · ${item.pts} pts</p></div>
+          <button type="button" onclick="removeCartItem(${idx})" class="text-xs text-red-600 font-bold px-2">✕</button>
+        </div>`;
+      }).join('');
+      document.getElementById('cart-price-total').textContent = '$' + total.toLocaleString('es-CO') + ' COP';
+      document.getElementById('cart-pts-total').textContent = pts.toFixed(1);
+    }
+    function payWithWompi() {
+      if (!cart.length) return alert('Agrega un producto primero.');
+      alert('🔒 PAGO SEGURO CON WOMPI BANCOLOMBIA:\n\nTotal a pagar: ' + document.getElementById('cart-price-total').textContent + '\n\nMétodos habilitados: Tarjeta de Crédito, Débito, Botón Bancolombia, PSE, Nequi y Efectivo.\nEnvío rápido: 24-48h capitales / hasta 72h municipios lejanos.');
+    }
+    function payContraentrega() {
+      if (!cart.length) return alert('Agrega un producto primero.');
+      const msg = `¡Hola NEXALIA! Quiero pedir con ENVÍO CONTRA ENTREGA: ${cart.map(x=>x.name).join(', ')} (Total: ${document.getElementById('cart-price-total').textContent}). Mi ciudad y dirección son: `;
+      window.open('https://wa.me/573000000000?text=' + encodeURIComponent(msg), '_blank');
+    }
+  </script>
+</body>
+</html>
